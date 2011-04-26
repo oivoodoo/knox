@@ -62,18 +62,6 @@ module.exports = {
     assert.equal('s3-eu-west-1.amazonaws.com', client.endpoint);
   },
 
-  //'test .putFile()': function(assert, done){
-    //var n = 0;
-    //client.putFile(jsonFixture, '/test/user.json', function(err, res){
-      //assert.ok(!err, 'putFile() got an error!');
-      //assert.equal(200, res.statusCode);
-      //client.get('/test/user.json').on('response', function(res){
-        //assert.equal('application/json', res.headers['content-type']);
-        //done();
-      //}).end();
-    //});
-  //},
-  
   'test .put()': function(assert, done){
     var n = 0;
     fs.stat(jsonFixture, function(err, stat){
@@ -102,24 +90,17 @@ module.exports = {
     });
   },
   
-  //'test .putStream()': function(assert, done){
-    //var stream = fs.createReadStream(jsonFixture);
-    //client.putStream(stream, '/test/user.json', function(err, res){
-      //assert.ok(!err);
-      //if (100 !== res.statusCode) assert.equal(200, res.statusCode);
-      //done();
-    //});
-  //},
-  
-  //'test .getFile()': function(assert, done){
-    //client.getFile('/test/user.json', function(err, res){
-      //assert.ok(!err);
-      //assert.equal(200, res.statusCode);
-      //assert.equal('application/json', res.headers['content-type'])
-      //assert.equal(13, res.headers['content-length'])
-      //done();
-    //});
-  //},
+  'test .getFile()': function(assert, done){
+    client.bucket(bucket_name, function(bucket) {
+      bucket.getFile('/test/user.json', function(err, res){
+        assert.ok(!err);
+        assert.equal(200, res.statusCode);
+        assert.equal('application/json', res.headers['content-type'])
+        assert.equal(13, res.headers['content-length'])
+        done();
+      });
+    });
+  },
   
   'test .get()': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
@@ -143,16 +124,6 @@ module.exports = {
     });
   },
   
-  //'test .headFile()': function(assert, done){
-    //client.headFile('/test/user.json', function(err, res){
-      //assert.ok(!err);
-      //assert.equal(200, res.statusCode);
-      //assert.equal('application/json', res.headers['content-type'])
-      //assert.equal(13, res.headers['content-length'])
-      //done();
-    //});
-  //},
-  
   'test .del()': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
       this.del(bucket, '/test/user.json').on('response', function(res){
@@ -161,14 +132,6 @@ module.exports = {
       }).end();
     });
   },
-  
-  //'test .deleteFile()': function(assert, done){
-    //client.deleteFile('/test/user.json', function(err, res){
-      //assert.ok(!err);
-      //assert.equal(204, res.statusCode);
-      //done();
-    //});
-  //},
   
   'test .get() 404': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
