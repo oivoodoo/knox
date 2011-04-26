@@ -20,6 +20,25 @@ try {
 var jsonFixture = __dirname + '/fixtures/user.json';
 
 module.exports = {
+
+  'test .create()': function(assert, done) {
+    var test_bucket = client.bucket('testbucketnamejustfortest');
+    test_bucket.create(function(err, res) {
+      assert.ok(!err, 'create() got an error!');
+      assert.equal(200, res.statusCode);
+      done();
+    });
+  },
+
+  'test .remove()': function(assert, done) {
+    var test_bucket = client.bucket('testbucketnamejustfortest');
+    test_bucket.remove(function(err, res) {
+      assert.ok(!err, "remove() got an error!");
+      assert.equal(204, res.statusCode);
+      done();
+    });
+  },
+
   'test .putFile()': function(assert, done){
     var n = 0;
     bucket.putFile(jsonFixture, '/test/user.json', function(err, res){
@@ -67,5 +86,5 @@ module.exports = {
       assert.equal(204, res.statusCode);
       done();
     });
-  },
+  }
 };
