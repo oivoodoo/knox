@@ -112,7 +112,7 @@ module.exports = {
       }).end();
     });
   },
-  
+
   'test .head()': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
       this.head(bucket, '/test/user.json').on('response', function(res){
@@ -123,7 +123,7 @@ module.exports = {
       }).end();
     });
   },
-  
+
   'test .del()': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
       this.del(bucket, '/test/user.json').on('response', function(res){
@@ -132,7 +132,7 @@ module.exports = {
       }).end();
     });
   },
-  
+
   'test .get() 404': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
       this.get(bucket, '/test/user.json').on('response', function(res){
@@ -141,13 +141,21 @@ module.exports = {
       }).end();
     });
   },
-  
+
   'test .head() 404': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
       this.head(bucket, '/test/user.json').on('response', function(res){
         assert.equal(404, res.statusCode);
         done();
       }).end();
+    });
+  },
+
+  'test .bucketList()': function(assert, done) {
+    client.bucketList(function(err, res) {
+      assert.ok(!err, "bucketList() got an error!");
+      assert.equal(200, res.statusCode);
+      done();
     });
   }
 };

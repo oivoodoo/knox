@@ -22,7 +22,7 @@ var jsonFixture = __dirname + '/fixtures/user.json';
 module.exports = {
 
   'test .create()': function(assert, done) {
-    var test_bucket = client.bucket('testbucketnamejustfortest');
+    var test_bucket = client.bucket('test_bucket_foo_baz');
     test_bucket.create(function(err, res) {
       assert.ok(!err, 'create() got an error!');
       assert.equal(200, res.statusCode);
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   'test .remove()': function(assert, done) {
-    var test_bucket = client.bucket('testbucketnamejustfortest');
+    var test_bucket = client.bucket('test_bucket_foo_baz');
     test_bucket.remove(function(err, res) {
       assert.ok(!err, "remove() got an error!");
       assert.equal(204, res.statusCode);
