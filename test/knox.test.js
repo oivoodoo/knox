@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var knox = require('../../knox')
+var knox = require('../lib/knox')
   , fs = require('fs');
 
 try {
