@@ -90,18 +90,6 @@ module.exports = {
     });
   },
   
-  'test .getFile()': function(assert, done){
-    client.bucket(bucket_name, function(bucket) {
-      bucket.getFile('/test/user.json', function(err, res){
-        assert.ok(!err);
-        assert.equal(200, res.statusCode);
-        assert.equal('application/json', res.headers['content-type'])
-        assert.equal(13, res.headers['content-length'])
-        done();
-      });
-    });
-  },
-  
   'test .get()': function(assert, done){
     client.bucket(bucket_name, function(bucket) {
       this.get(bucket, '/test/user.json').on('response', function(res){
